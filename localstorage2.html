@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#parent {
+  text-align: center;
+  margin-top: 50px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#data {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.user-card {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.user-card img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.user-details {
+  margin-top: 10px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.email {
+  color: #888;
+}
+
+  </style>
+</head>
+
+<body>
+  <div id="parent">
+    <button>Fetch</button>
+    <div id="data">
+
+    </div>
+
+
+
+</body>
+
+</html>
+<script>
+  document.querySelector('button').addEventListener('click', datarecived)
+  function datarecived() {
+    fetch('https://reqres.in/api/users')
+      .then(response => response.json())
+      .then(myinfo => {
+        let output = " "
+        console.log(myinfo.data)
+        myinfo.data.forEach(user => {
+          output +=`
+              <div class="user-card">
+                <img src="${user.avatar}" alt="user avatar">
+                <div class="user-details">
+                  <span class="name">${user.first_name}</span>
+                  <span class="email">${user.email}</span>
+                </div>
+              </div>
+            `;
+            
+        })
+        document.getElementById('data').innerHTML = output;
+      })
+
+
+
+
+
+
+  }
+
+</script>
